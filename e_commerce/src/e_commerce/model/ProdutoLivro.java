@@ -1,5 +1,7 @@
 package e_commerce.model;
 
+import e_commerce.util.Cores;
+
 public class ProdutoLivro extends Produto 
 {
     private String autor;
@@ -14,7 +16,17 @@ public class ProdutoLivro extends Produto
         this.editora = editora;
     }
     @Override
-    public void exibirInfoProduto() {
+    public void visualizar() 
+    {
+        System.out.println(Cores.TEXT_YELLOW + "Detalhes do Livro:" + Cores.TEXT_RESET);
+        super.exibirInfoProduto();
+        System.out.println("Autor: " + autor);
+        System.out.println("ISBN: " + isbn);
+        System.out.println("Editora: " + editora);
+    }
+    @Override
+    public void exibirInfoProduto() 
+    {
         super.exibirInfoProduto();
         System.out.println("Autor: " + autor);
         System.out.println("ISBN: " + isbn);

@@ -107,4 +107,8 @@ public abstract class Produto
 		this.quantidadeEstoque = novoProduto.getQuantidadeEstoque();
 		this.categoria = novoProduto.getCategoria();
 	}
+	public void visualizar() {
+		// TODO Auto-generated method stub
+		
+	}
 }
