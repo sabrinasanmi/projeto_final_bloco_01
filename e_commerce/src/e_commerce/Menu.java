@@ -6,6 +6,7 @@ import java.io.IOException;
 import e_commerce.util.Cores;
 import e_commerce.controller.ProdutoController;
 import e_commerce.model.Produto;
+import e_commerce.model.ProdutoGeral;
 import e_commerce.model.ProdutoLivro;
 import e_commerce.repository.ProdutoRepository;
 
@@ -16,6 +17,58 @@ public class Menu
 	{
 		Scanner leia = new Scanner(System.in);
 		ProdutoController controller = new ProdutoController();
+		
+		// Criação de produtos padrão
+	    ProdutoLivro produto1 = new ProdutoLivro(
+	            1, 
+	            "Harry Potter e o Cálice de Fogo", 
+	            "J. K. Rowling", 
+	            "Personalizado da Casa Grifinória em capa dura, com pintura trilateral e fitilho.", 
+	            149.90f, 
+	            10, 
+	            "Fantasia", 
+	            "978-0439139601", 
+	            "Rocco"
+	    );
+	    
+	    ProdutoLivro produto2 = new ProdutoLivro(
+	            2, 
+	            "Atômica: A Cidade Mais Fria", 
+	            "JOHNSTON,ANTONY; HART,SAM", 
+	            "DARKSIDE", 
+	            59.90f, 
+	            5, 
+	            "Ação", 
+	            "978-8566636594", 
+	            "Darkside"
+	    );
+	    
+	    ProdutoLivro produto3 = new ProdutoLivro(
+	            3, 
+	            "Sem coração", 
+	            "Marissa Meyer e Regiane Winarski", 
+	            "Uma reinterpretação da história da Rainha de Copas antes de se tornar a vilã de Alice no País das Maravilhas.", 
+	            39.90f, 
+	            8, 
+	            "Romance", 
+	            "978-8594540566", 
+	            "Rocco"
+	    );
+
+	    ProdutoGeral caneca = new ProdutoGeral(
+	            4, 
+	            "Caneca JV", 
+	            "Caneca personalizada de 325ml. Feita com cerâmica de alta qualidade. Inspirada no livro Jogos Vorazes", 
+	            29.90f, 
+	            15, 
+	            "Utilidades"
+	    );
+	    
+	    // Adiciona os produtos ao controller
+	    controller.adicionarProduto(produto1);
+	    controller.adicionarProduto(produto2);
+	    controller.adicionarProduto(produto3);
+	    controller.adicionarProduto(caneca);
 		
 		int opcao, id;
 		String titulo, autor, descricao, categoria, isbn, editora;
@@ -63,31 +116,49 @@ public class Menu
 			{
 			case 1:
 				System.out.println(Cores.TEXT_WHITE + "Cadastrar produto\n\n");
-				System.out.println("Digite o ID do produto: ");
-				id = leia.nextInt();
-				leia.nextLine(); // Consume newline
-				System.out.println("Digite o título do livro: ");
-				titulo = leia.nextLine();
-				System.out.println("Digite o autor do livro: ");
-				autor = leia.nextLine();
-				System.out.println("Digite a descrição do livro: ");
-				descricao = leia.nextLine();
-				System.out.println("Digite o preço do livro: ");
-				preco = leia.nextFloat();
-				System.out.println("Digite a quantidade em estoque: ");
-				quantidadeEstoque = leia.nextInt();
-				leia.nextLine(); // Consume newline
-				System.out.println("Digite a categoria do livro: ");
-				categoria = leia.nextLine();
-				System.out.println("Digite o ISBN do livro: ");
-				isbn = leia.nextLine();
-				System.out.println("Digite a editora do livro: ");
-				editora = leia.nextLine();
+			    System.out.println("Digite o tipo de produto (1 - Livro, 2 - Produto Geral): ");
+			    int tipoProduto = leia.nextInt();
+			    leia.nextLine(); // Consume newline
 
-				ProdutoLivro novoLivro = new ProdutoLivro(id, titulo, autor, descricao, preco, quantidadeEstoque, categoria, isbn, editora);
-				controller.adicionarProduto(novoLivro);
-				keyPress();
-				break;
+			    System.out.println("Digite o ID do produto: ");
+			    id = leia.nextInt();
+			    leia.nextLine(); // Consume newline
+
+			    System.out.println("Digite o nome do produto: ");
+			    String nome = leia.nextLine();
+
+			    System.out.println("Digite a descrição do produto: ");
+			    descricao = leia.nextLine();
+
+			    System.out.println("Digite o preço do produto: ");
+			    preco = leia.nextFloat();
+
+			    System.out.println("Digite a quantidade em estoque: ");
+			    quantidadeEstoque = leia.nextInt();
+			    leia.nextLine(); // Consume newline
+
+			    System.out.println("Digite a categoria do produto: ");
+			    categoria = leia.nextLine();
+
+			    if (tipoProduto == 1) {
+			        System.out.println("Digite o autor do livro: ");
+			        autor = leia.nextLine();
+
+			        System.out.println("Digite o ISBN do livro: ");
+			        isbn = leia.nextLine();
+
+			        System.out.println("Digite a editora do livro: ");
+			        editora = leia.nextLine();
+
+			        ProdutoLivro novoLivro = new ProdutoLivro(id, nome, autor, descricao, preco, quantidadeEstoque, categoria, isbn, editora);
+			        controller.adicionarProduto(novoLivro);
+			    } else {
+			        ProdutoGeral novoProduto = new ProdutoGeral(id, nome, descricao, preco, quantidadeEstoque, categoria);
+			        controller.adicionarProduto(novoProduto);
+			    }
+
+			    keyPress();
+			    break;
 			case 2:
 				System.out.println(Cores.TEXT_WHITE + "Listar todos os produtos\n\n");
 				for (Produto produto : controller.listarProdutos()) 
