@@ -3,7 +3,8 @@ package e_commerce;
 import java.util.Scanner;
 import java.io.IOException;
 import e_commerce.util.Cores;
-
+import e_commerce.model.Produto;
+import e_commerce.repository.ProdutoRepository;
 
 public class Menu 
 {
