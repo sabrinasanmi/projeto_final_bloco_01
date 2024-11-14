@@ -1,6 +1,6 @@
 package e_commerce.model;
 
-public class Produto
+public abstract class Produto
 {
 
 	private int id;
@@ -10,15 +10,15 @@ public class Produto
 	private int quantidadeEstoque;
 	private String categoria;
 
-	public Produto(int id, String nome, String descricao, float preco, int quantidadeEstoque, String categoria) {
+	public Produto(int id, String nome, String descricao, float preco, int quantidadeEstoque, String categoria) 
+	{
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.preco = preco;
 		this.quantidadeEstoque = quantidadeEstoque;
 		this.categoria = categoria;
-}
-
+	}
 	public int getId() 
 	{
 		return id;

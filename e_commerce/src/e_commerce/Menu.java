@@ -1,5 +1,6 @@
 package e_commerce;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.io.IOException;
 import e_commerce.util.Cores;
@@ -34,8 +35,16 @@ public class Menu
 			System.out.println("Entre com a opção desejada:                         ");
 			System.out.println("                                                    " + Cores.TEXT_RESET);
 
-			opcao = leia.nextInt();
-			
+			try 
+			{
+				opcao = leia.nextInt();
+			}
+			catch(InputMismatchException e)
+			{
+				System.out.println("\nDigite valores inteiros!");
+				leia.nextLine();
+				opcao=0;
+			}
 			if (opcao == 6) 
 			{
 				System.out.println(Cores.TEXT_CYAN_BOLD + "\n SANMI STORE, O que você precisa está aqui.");
